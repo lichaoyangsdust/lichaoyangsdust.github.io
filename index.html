@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Chaoyang Li, Associate Professor of Geophysics, Shandong University of Science and Technology. Tectonic geophysics and thermo-mechanical modeling.">
+<title>Chaoyang Li’s Homepage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap">
+<style>
+/* Layout: academic homepage — sticky profile column + right-hand catalogue of work, citation-style entries; EN/中文 toggle */
+:root {
+  --bg: #f6f7f8;
+  --surface: #ffffff;
+  --ink: #515151;
+  --head: #002864;
+  --muted: #7a7a7a;
+  --line: #dde1e6;
+  --accent: #002864;
+  --accent-soft: #e8edf5;
+  --serif: "Inter Tight", Inter, Verdana, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --sans: Inter, Verdana, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --mono: var(--sans);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12161b; --surface: #1a2027; --ink: #d6dbe0; --head: #e8eef5; --muted: #9aa5b1;
+    --line: #2c343d; --accent: #8db8e0; --accent-soft: #1e2a37; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12161b; --surface: #1a2027; --ink: #d6dbe0; --head: #e8eef5; --muted: #9aa5b1;
+  --line: #2c343d; --accent: #8db8e0; --accent-soft: #1e2a37; color-scheme: dark;
+}
+
+/* Language switching */
+:root:not([data-lang="zh"]) .zh { display: none !important; }
+:root[data-lang="zh"] .en { display: none !important; }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+a:hover { border-bottom-color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.shell {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 64px;
+  display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 64px;
+}
+
+/* Profile column */
+.card { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 32px); align-self: start; display: grid; gap: 20px; }
+.lang { display: inline-flex; justify-self: start; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.lang button { font: inherit; font-size: 13.5px; border: 0; background: transparent; color: var(--muted); padding: 3px 12px; border-radius: 999px; cursor: pointer; }
+.lang button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+.photo { width: 160px; max-width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); display: block; }
+.card h1 { font-family: var(--serif); font-size: 26px; line-height: 1.2; margin: 0; font-weight: 600; color: var(--head); text-wrap: balance; }
+.card .role { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 8px 0 0; }
+.contact { display: grid; gap: 10px; font-size: 14.5px; margin: 0; padding-top: 16px; border-top: 1px solid var(--line); }
+.contact div { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 8px; }
+.contact dt { color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding-top: 2px; }
+.contact dd { margin: 0; overflow-wrap: anywhere; }
+.nav { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 16px; }
+.nav a { border: 0; color: var(--ink); font-size: 15px; padding: 3px 0; }
+.nav a:hover { color: var(--accent); }
+
+/* Main column */
+main { display: grid; gap: 52px; min-width: 0; }
+section { display: grid; gap: 20px; }
+h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--head); margin: 0; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+.about p { margin: 0; max-width: 65ch; }
+.tags { display: grid; gap: 10px; margin-top: 4px; }
+.tag-row { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 12px; align-items: baseline; }
+.tag-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.interests { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--accent-soft); color: var(--accent); font-size: 13.5px; padding: 1px 12px; border-radius: 999px; }
+.chip-m { background: transparent; border: 1px solid var(--accent); padding: 1px 11px; }
+@media (max-width: 480px) { .tag-row { grid-template-columns: minmax(0,1fr); gap: 6px; } }
+
+.sub { margin: 4px 0 -8px; font-family: var(--serif); font-size: 15.5px; font-weight: 600; color: var(--head); }
+
+/* Experience */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.timeline li { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 12px; font-size: 15px; }
+.tl-when { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 480px) { .timeline li { grid-template-columns: minmax(0,1fr); gap: 0; } }
+
+/* Reference lists (AGU / JGR style), hanging indent */
+.pub-note { margin: -8px 0 0; font-size: 14.5px; color: var(--muted); }
+.agu { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.agu { counter-reset: ag; }
+.agu li { counter-increment: ag; display: grid; grid-template-columns: 40px minmax(0,1fr); font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; }
+.agu li::before { content: "[" counter(ag) "]"; color: var(--muted); }
+.agu b, .plist b { font-weight: 600; color: var(--head); }
+.agu a { border-bottom: 0; }
+.agu a:hover { text-decoration: underline; }
+
+/* Projects */
+.plist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: pj; }
+.plist li { counter-increment: pj; display: grid; grid-template-columns: 40px minmax(0,1fr); font-size: 15px; line-height: 1.6; }
+.plist li::before { content: "[" counter(pj) "]"; color: var(--muted); }
+
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 820px) {
+  .shell { grid-template-columns: minmax(0,1fr); gap: 36px; padding-block: 24px 48px; }
+  .card { position: static; grid-template-columns: auto minmax(0,1fr); align-items: center; column-gap: 20px; }
+  .photo { width: 96px; }
+  .card .lang, .card .contact, .card .nav { grid-column: 1 / -1; }
+  .nav { display: flex; flex-wrap: wrap; gap: 4px 16px; }
+}
+</style>
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <aside class="card">
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" id="lang-zh" data-lang="zh" aria-pressed="false">中文</button>
+    </div>
+    <img class="photo" src="photo.jpg" alt="Portrait of Chaoyang Li" width="480" height="640">
+    <div>
+      <h1><span class="en">Chaoyang Li</span><span class="zh">李朝阳</span></h1>
+      <p class="role en">Associate Professor<br>Deputy Director, Department of Geophysics<br>Master’s Supervisor<br>College of Earth Science and Engineering<br>Shandong University of Science and Technology</p>
+      <p class="role zh">副教授<br>地球物理系副主任<br>硕士生导师<br>地球科学与工程学院<br>山东科技大学</p>
+    </div>
+    <dl class="contact">
+      <div><dt><span class="en">Email</span><span class="zh">邮箱</span></dt><dd>lichaoyang@sdust.edu.cn<br>lichaoyang@hotmail.com</dd></div>
+      <div><dt><span class="en">Research</span><span class="zh">方向</span></dt><dd><span class="en">Tectonic geophysics; thermo-mechanical modeling</span><span class="zh">构造地球物理；岩石圈热动力学数值模拟</span></dd></div>
+      <div><dt><span class="en">Methods</span><span class="zh">方法</span></dt><dd><span class="en">Seismic interpretation, gravity and magnetic inversion, numerical modeling (ASPECT, I2VIS)</span><span class="zh">地震解释、重磁反演、数值模拟（ASPECT、I2VIS）</span></dd></div>
+      <div><dt>ORCID</dt><dd><a href="https://orcid.org/0000-0003-0003-8749" target="_blank" rel="noopener">0000-0003-0003-8749</a></dd></div>
+    </dl>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about"><span class="en">About</span><span class="zh">个人简介</span></a>
+      <a href="#exp"><span class="en">Experience</span><span class="zh">教育与工作经历</span></a>
+      <a href="#papers"><span class="en">Publications</span><span class="zh">发表论文</span></a>
+      <a href="#data"><span class="en">Published Data</span><span class="zh">发表数据</span></a>
+      <a href="#talks"><span class="en">Conferences and Talks</span><span class="zh">学术会议</span></a>
+      <a href="#projects"><span class="en">Projects</span><span class="zh">科研项目</span></a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="about" class="about">
+      <h2><span class="en">About</span><span class="zh">个人简介</span></h2>
+      <p class="en">I am an associate professor in the Department of Geophysics at Shandong University of Science and Technology, where I also supervise master’s students. My work sits at the intersection of tectonics, geophysics and numerical modeling.</p>
+      <p class="en">My recent research interests include lower-crustal domes in the northern South China Sea, the Hainan mantle plume, and lithospheric drips beneath the North China Craton. I try to bring observations, geophysical inversion and numerical modeling closely together, so that each provides strong constraints on the others and a way to test them. From 2025.11 to 2026.11, I spent a year as a visiting scientist at the GFZ Helmholtz Centre for Geosciences in Potsdam to learn more about rift modeling. There is still a great deal I am learning, and I am always glad to hear from students and colleagues interested in continental rifting, mantle plumes or basin evolution.</p>
+      <p class="zh">我是山东科技大学地球物理系副教授、硕士生导师，主要从事构造地质、地球物理与数值模拟的交叉研究。</p>
+      <p class="zh">近期主要关注南海北部下地壳穹隆、海南地幔柱以及华北克拉通岩石圈滴落等问题。研究中，我希望把观测、地球物理反演与数值模拟紧密结合，使三者相互约束、相互印证。2025年11月至2026年11月，我在德国亥姆霍兹波茨坦地学研究中心（GFZ）访学一年，从事裂谷数值模拟研究。欢迎对大陆张裂、地幔柱和盆地演化感兴趣的同学和同行交流合作。</p>
+      <div class="tags">
+        <div class="tag-row"><span class="tag-label"><span class="en">Research</span><span class="zh">方向</span></span><div class="interests">
+          <span class="chip"><span class="en">Tectonic geophysics</span><span class="zh">构造地球物理</span></span>
+          <span class="chip"><span class="en">Thermo-mechanical modeling</span><span class="zh">岩石圈热动力学数值模拟</span></span>
+        </div></div>
+        <div class="tag-row"><span class="tag-label"><span class="en">Methods</span><span class="zh">方法</span></span><div class="interests">
+          <span class="chip chip-m"><span class="en">Seismic interpretation</span><span class="zh">地震解释</span></span>
+          <span class="chip chip-m"><span class="en">Gravity &amp; magnetic inversion</span><span class="zh">重磁反演</span></span>
+          <span class="chip chip-m"><span class="en">Numerical modeling</span><span class="zh">数值模拟</span> · ASPECT</span>
+          <span class="chip chip-m"><span class="en">Numerical modeling</span><span class="zh">数值模拟</span> · I2VIS</span>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="exp">
+      <h2><span class="en">Experience</span><span class="zh">教育与工作经历</span></h2>
+      <h3 class="sub"><span class="en">Employment</span><span class="zh">工作经历</span></h3>
+      <ol class="timeline">
+        <li><span class="tl-when">2021.11–<span class="en">Present</span><span class="zh">至今</span></span><span><span class="en">Shandong University of Science and Technology</span><span class="zh">山东科技大学</span></span></li>
+        <li><span class="tl-when">2025.11–2026.11</span><span><span class="en">GFZ Helmholtz Centre for Geosciences, Potsdam, Germany (Visiting Scientist; collaborators: Dr. Alexander Koptev, Dr. Michael Pons, Prof. Sascha Brune and Prof. Claudio Faccenna)</span><span class="zh">德国亥姆霍兹波茨坦地学研究中心（GFZ），访问学者（合作者：Alexander Koptev 博士、Michael Pons 博士、Sascha Brune 教授、Claudio Faccenna 教授）</span></span></li>
+        <li><span class="tl-when">2018.07–2021.10</span><span><span class="en">Dalian University of Technology</span><span class="zh">大连理工大学</span></span></li>
+      </ol>
+      <h3 class="sub"><span class="en">Education</span><span class="zh">教育经历</span></h3>
+      <ol class="timeline">
+        <li><span class="tl-when">2013.09–2018.06</span><span><span class="en">Ph.D. in Marine Geology, Ocean University of China (successive master’s–doctoral program; advisor: Prof. Xiaodian Jiang)</span><span class="zh">中国海洋大学，海洋地质，博士（硕博连读；导师：姜效典教授）</span></span></li>
+        <li><span class="tl-when">2009.09–2013.06</span><span><span class="en">B.S. in Geology, Ocean University of China</span><span class="zh">中国海洋大学，地质学，学士</span></span></li>
+      </ol>
+    </section>
+
+    <section id="papers">
+      <h2><span class="en">Publications</span><span class="zh">发表论文</span></h2>
+      <p class="pub-note"><span class="en">* Corresponding author</span><span class="zh">* 通讯作者</span></p>
+      <h3 class="sub"><span class="en">English Publications</span><span class="zh">英文论文</span></h3>
+      <ul class="agu">
+        <li><span>Jiang, L., Li, D., Jiang, X., Gong, W., Xing, J., Zeng, Y., Wang, S., <b>Li, C.</b>, Liu, X., Sun, P., &amp; Long, J. (2026). Petrology and diagenetic evolution of beachrock in Zhaoshu Island, Xisha Islands. <i>Geological Journal</i>. <a href="https://doi.org/10.1002/gj.70290" target="_blank" rel="noopener">https://doi.org/10.1002/gj.70290</a></span></li>
+        <li><span>Gong, W., <b>Li, C.</b>*, Jiang, L., Wang, Y., Li, H., Zhao, L., &amp; Zhao, F. (2025). Tectonic evolution of the Ailao Shan–Red River Fault since the Middle Miocene from apatite fission track thermochronology and its implications for Tibetan Plateau growth. <i>Acta Geologica Sinica (English Edition)</i>, <i>99</i>(1), 126–143. <a href="https://doi.org/10.1111/1755-6724.15272" target="_blank" rel="noopener">https://doi.org/10.1111/1755-6724.15272</a></span></li>
+        <li><span>Zhao, L., Guo, D., <b>Li, C.</b>*, Bi, Z., Hu, Y., Liu, H., &amp; Han, T. (2025). Typhoon-induced wave–current coupling dynamics in intertidal zones: Impacts on protective device of ancient forest relics. <i>Journal of Marine Science and Engineering</i>, <i>13</i>(9), 1831. <a href="https://doi.org/10.3390/jmse13091831" target="_blank" rel="noopener">https://doi.org/10.3390/jmse13091831</a></span></li>
+        <li><span><b>Li, C.</b>, Gong, W., Zhao, L., Li, Z., Zhi, P., &amp; Ge, J. (2024). Gravity-seismic joint inversion of lithospheric density structure in the Qiongdongnan Basin, northwest South China Sea. <i>Lithosphere</i>, <i>2024</i>(1), lithosphere_2023_124. <a href="https://doi.org/10.2113/2024/lithosphere_2023_124" target="_blank" rel="noopener">https://doi.org/10.2113/2024/lithosphere_2023_124</a></span></li>
+        <li><span>Wu, X., Li, C., Fan, J., <b>Li, C.</b>, Bai, Q., Feng, J., &amp; Dong, D. (2024). Cenozoic evolution of the Bohai Bay Basin: Constraints from seismic radial anisotropy. <i>Geophysical Research Letters</i>, <i>51</i>(12), e2023GL107112. <a href="https://doi.org/10.1029/2023GL107112" target="_blank" rel="noopener">https://doi.org/10.1029/2023GL107112</a></span></li>
+        <li><span><b>Li, C.</b>, Zhi, P., Ding, R., Zhao, L., Gong, W., Li, Z., &amp; Ge, J. (2023). Differences in thermo-rheological structure between Qiongdongnan Basin and Pearl River Mouth Basin: Implications for the extension model in the northwestern margin of the South China Sea. <i>Journal of Marine Science and Engineering</i>, <i>11</i>(2), 443. <a href="https://doi.org/10.3390/jmse11020443" target="_blank" rel="noopener">https://doi.org/10.3390/jmse11020443</a></span></li>
+        <li><span>Zhang, H., Gong, W., Xing, J., Xu, C., &amp; <b>Li, C.</b>* (2023). The subduction structure beneath the New Britain Island Arc and the adjacent region from double-difference tomography. <i>Journal of Ocean University of China</i>, <i>22</i>, 107–118. <a href="https://doi.org/10.1007/s11802-023-5282-5" target="_blank" rel="noopener">https://doi.org/10.1007/s11802-023-5282-5</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., Gong, W., Zhou, H., &amp; Yang, K. (2022). Differences in east-west thermo-rheological structure and lithospheric deformation in the Qaidam Basin, northern Tibetan Plateau, China. <i>International Geology Review</i>, <i>64</i>(7), 933–952. <a href="https://doi.org/10.1080/00206814.2021.1894610" target="_blank" rel="noopener">https://doi.org/10.1080/00206814.2021.1894610</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., &amp; Gong, W. (2022). Thermo-rheological structure and passive continental margin rifting in the Qiongdongnan Basin, South China Sea, China. <i>Journal of Ocean University of China</i>, <i>21</i>(2), 347–360. <a href="https://doi.org/10.1007/s11802-022-4927-0" target="_blank" rel="noopener">https://doi.org/10.1007/s11802-022-4927-0</a></span></li>
+        <li><span>Zhao, L., Zhang, T., Ling, Z., Li, M., Zhi, P., Ding, R., &amp; <b>Li, C.</b> (2022). Spatial and temporal variations in crustal structure in the Eurasian Basin. <i>Journal of Marine Science and Engineering</i>, <i>10</i>(2), 157. <a href="https://doi.org/10.3390/jmse10020157" target="_blank" rel="noopener">https://doi.org/10.3390/jmse10020157</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., &amp; Gong, W. (2021a). Difference of shortening strain for the crustal deformation model in the eastern and western Qaidam Basin and their implications, northern Tibetan Plateau, China. <i>Geological Journal</i>, <i>56</i>(11), 5712–5724. <a href="https://doi.org/10.1002/gj.4267" target="_blank" rel="noopener">https://doi.org/10.1002/gj.4267</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., &amp; Gong, W. (2021b). Quantifying the contribution of upper-middle crustal shortening and lower crustal thickening to surface uplift in the southeastern Tibetan Plateau. <i>Geological Journal</i>, <i>56</i>(7), 3523–3540. <a href="https://doi.org/10.1002/gj.4113" target="_blank" rel="noopener">https://doi.org/10.1002/gj.4113</a></span></li>
+        <li><span>Gong, W., Jiang, X., Xing, J., Xu, C., Zhang, H., An, L., &amp; <b>Li, C.</b>* (2021). Heterogeneous outer-rise seismicity within the Izu–Bonin subduction zone and its tectonic implications. <i>Geological Journal</i>, <i>56</i>(9), 4699–4718. <a href="https://doi.org/10.1002/gj.4206" target="_blank" rel="noopener">https://doi.org/10.1002/gj.4206</a></span></li>
+        <li><span>Jiang, X., Li, Z.-X., <b>Li, C.</b>, &amp; Gong, W. (2019). A gravity study of the Longmenshan Fault Zone: New insights into the nature and evolution of the fault zone and extrusion-style growth of the Tibetan Plateau since 40 Ma. <i>Tectonics</i>, <i>38</i>(1), 176–189. <a href="https://doi.org/10.1029/2018TC005272" target="_blank" rel="noopener">https://doi.org/10.1029/2018TC005272</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., Gong, W., Li, D., &amp; Li, C. (2018). Surface uplift of the Central Yunnan Plateau since the Pliocene. <i>Geological Journal</i>, <i>53</i>(1), 386–396. <a href="https://doi.org/10.1002/gj.2904" target="_blank" rel="noopener">https://doi.org/10.1002/gj.2904</a></span></li>
+        <li><span>Wu, X., Xing, J., <b>Li, C.</b>, Liu, X., Yang, K., Chen, H., &amp; Gong, W. (2018). Application of geoid anomalies to the tectonic research in the East Asian continental margin. <i>Journal of Ocean University of China</i>, <i>17</i>(4), 811–822. <a href="https://doi.org/10.1007/s11802-018-3589-4" target="_blank" rel="noopener">https://doi.org/10.1007/s11802-018-3589-4</a></span></li>
+      </ul>
+      <h3 class="sub"><span class="en">Chinese Publications</span><span class="zh">中文论文</span></h3>
+      <ul class="agu en">
+        <li><span>Zhong, K., Chen, C., <b>Li, C.</b>, &amp; Xu, Q. (2026). Petroleum geological conditions and exploration breakthrough directions in Northern Depression of South Yellow Sea Basin (in Chinese with English abstract). <i>Petroleum Geology and Recovery Efficiency</i>, <i>33</i>(5), 47–56.</span></li>
+        <li><span><b>Li, C.</b>, Xu, Q., Hu, Y., Cao, S., Liu, H., Han, T., Zhao, L., &amp; Ge, J. (2026). Lithospheric density structure and non-uniform extension mode of the Qiongdongnan Basin based on joint gravity-seismic inversion (in Chinese with English abstract). <i>Journal of Shandong University of Science and Technology (Natural Science)</i>, <i>45</i>(1), 37–49. <a href="https://doi.org/10.16452/j.cnki.sdkjzk.2026.01.004" target="_blank" rel="noopener">https://doi.org/10.16452/j.cnki.sdkjzk.2026.01.004</a></span></li>
+        <li><span>Li, Z., <b>Li, C.</b>*, Dong, D., &amp; Guo, D. (2025). Joint inversion of gravity and seismic data for the Moho in the Qaidam Basin with control points (in Chinese with English abstract). <i>Geological Journal of China Universities</i>, <i>31</i>(3), 363–374. <a href="https://doi.org/10.16108/j.issn1006-7493.2024046" target="_blank" rel="noopener">https://doi.org/10.16108/j.issn1006-7493.2024046</a></span></li>
+        <li><span>Ge, J., <b>Li, C.</b>, Cao, S., Liu, H., Zhao, L., &amp; Zhang, J.* (2025). Identification of high-density anomalies in the lower crust of the Qiongdongnan Basin based on joint gravity-seismic inversion (in Chinese with English abstract). <i>Marine Geology Frontiers</i>, <i>41</i>(10), 38–49. <a href="https://doi.org/10.16028/j.1009-2722.2024.250" target="_blank" rel="noopener">https://doi.org/10.16028/j.1009-2722.2024.250</a></span></li>
+        <li><span>Gong, W., <b>Li, C.</b>, &amp; Jiang, X. (2017). Uplift of the Tibetan Plateau and opening of the South China Sea: The basin-mountain coupling system in the northwestern South China Sea (in Chinese with English abstract). <i>Earth Science Frontiers</i>, <i>24</i>(4), 268–283. <a href="https://doi.org/10.13745/j.esf.yx.2017-3-3" target="_blank" rel="noopener">https://doi.org/10.13745/j.esf.yx.2017-3-3</a></span></li>
+        <li><span>Sun, Y., Jiang, X., Wang, Y., <b>Li, C.</b>, et al. (2017). Application of the satellite altimetry-derived gravity field in the western Pacific (in Chinese with English abstract). <i>Periodical of Ocean University of China</i>, <i>47</i>(6), 87–94. <a href="https://doi.org/10.16441/j.cnki.hdxb.20150411" target="_blank" rel="noopener">https://doi.org/10.16441/j.cnki.hdxb.20150411</a></span></li>
+        <li><span><b>Li, C.</b>, Jiang, X., Li, D., et al. (2016). Tectonic uplift and its causes in the central-southern segment of the Red River Fault Zone since the Pliocene (in Chinese with English abstract). <i>Periodical of Ocean University of China</i>, <i>46</i>(7), 90–98.</span></li>
+      </ul>
+      <ul class="agu zh">
+        <li><span>钟锴, 陈春峰, <b>李朝阳</b>, 徐乔. 南黄海盆地北部坳陷石油地质条件与勘探突破方向[J]. 油气地质与采收率, 2026, 33(5): 47–56.</span></li>
+        <li><span><b>李朝阳</b>, 徐乔, 胡毅, 曹淑鑫, 刘洪芹, 韩同举, 赵俐红, 葛佳裕. 基于重震联合反演的琼东南盆地岩石圈密度结构和非均一伸展模式研究[J]. 山东科技大学学报（自然科学版）, 2026, 45(1): 37–49. <a href="https://doi.org/10.16452/j.cnki.sdkjzk.2026.01.004" target="_blank" rel="noopener">https://doi.org/10.16452/j.cnki.sdkjzk.2026.01.004</a></span></li>
+        <li><span>李忠华, <b>李朝阳</b>*, 董冬冬, 郭德乐. 带控制点的柴达木盆地莫霍面重震联合反演[J]. 高校地质学报, 2025, 31(3): 363–374. <a href="https://doi.org/10.16108/j.issn1006-7493.2024046" target="_blank" rel="noopener">https://doi.org/10.16108/j.issn1006-7493.2024046</a></span></li>
+        <li><span>葛佳裕, <b>李朝阳</b>, 曹淑鑫, 刘洪芹, 赵俐红, 张金伟*. 基于重震联合反演的琼东南盆地下地壳高密度异常识别[J]. 海洋地质前沿, 2025, 41(10): 38–49. <a href="https://doi.org/10.16028/j.1009-2722.2024.250" target="_blank" rel="noopener">https://doi.org/10.16028/j.1009-2722.2024.250</a></span></li>
+        <li><span>宫伟, <b>李朝阳</b>, 姜效典. 青藏高原隆升与南海开启：南海西北部盆-山耦合体系[J]. 地学前缘, 2017, 24(4): 268–283. <a href="https://doi.org/10.13745/j.esf.yx.2017-3-3" target="_blank" rel="noopener">https://doi.org/10.13745/j.esf.yx.2017-3-3</a></span></li>
+        <li><span>孙杨, 姜效典, 王燚, <b>李朝阳</b>, 等. 卫星测高反演重力场在西太平洋海域的应用[J]. 中国海洋大学学报, 2017, 47(6): 87–94. <a href="https://doi.org/10.16441/j.cnki.hdxb.20150411" target="_blank" rel="noopener">https://doi.org/10.16441/j.cnki.hdxb.20150411</a></span></li>
+        <li><span><b>李朝阳</b>, 姜效典, 李德勇, 等. 红河断裂带中南段上新世以来构造隆升及成因[J]. 中国海洋大学学报, 2016, 46(7): 90–98.</span></li>
+      </ul>
+    </section>
+
+    <section id="data">
+      <h2><span class="en">Published Data</span><span class="zh">发表数据</span></h2>
+      <ul class="agu">
+        <li><span><b>Li, C.</b> (2026). Lithospheric Drip-Triggered Cenozoic Intraplate Volcanism Along the Northern Margin of the North China Craton (Version 1.0) [Dataset]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23425595" target="_blank" rel="noopener">https://doi.org/10.5281/zenodo.23425595</a></span></li>
+        <li><span><b>Li, C.</b> (2026). Thermo-Mechanical Controls on Lower-Crustal Dome Styles in the Northwestern South China Sea (Version 1.0) [Dataset]. Zenodo. <a href="https://doi.org/10.5281/zenodo.22206973" target="_blank" rel="noopener">https://doi.org/10.5281/zenodo.22206973</a></span></li>
+      </ul>
+    </section>
+
+    <section id="talks">
+      <h2><span class="en">Conferences and Talks</span><span class="zh">学术会议</span></h2>
+      <ul class="agu">
+        <li><span><b>Li, C.</b>, Koptev, A., Pons, M., &amp; Brune, S. (2026). Non-uniform lithospheric extension of the Qiongdongnan Basin driven by Hainan mantle plume migration: Insights from thermo-mechanical 2D modelling. <i>EGU General Assembly 2026</i>, Vienna, Austria, EGU26-15610. <a href="https://doi.org/10.5194/egusphere-egu26-15610" target="_blank" rel="noopener">https://doi.org/10.5194/egusphere-egu26-15610</a></span></li>
+        <li class="en"><span>Modelling of continental rifting in South China Sea. <i>Section 2.5 Geodynamic Modelling, GFZ Helmholtz Centre for Geosciences, Potsdam</i>, 2025.12.</span></li>
+        <li class="zh"><span>Modelling of continental rifting in South China Sea. <i>德国地学研究中心（GFZ）2.5 地球动力数值模拟组</i>, 2025.12.</span></li>
+        <li class="en"><span>Thermo-dynamic effects of the Red River Fault on the Qiongdongnan Basin and the resulting extension mode of the northwestern South China Sea margin. <i>Annual Meeting of the Fujian Provincial Key Laboratory of Marine Physical and Geological Processes</i>, 2024.08.</span></li>
+        <li class="zh"><span>红河断裂带在琼东南盆地的热动力学效应及其驱动下的南海西北陆缘伸展模式. <i>福建省海洋物理与地质过程重点实验室学术年会</i>, 2024.08.</span></li>
+        <li class="en"><span>Mechanism of non-uniform lithospheric extension in the Qiongdongnan Basin driven by a dual thermal-dynamic system. <i>2024 Marine Geophysics Forum</i>, 2024.04.</span></li>
+        <li class="zh"><span>双热动力系统驱动的琼东南盆地岩石圈非均一伸展机制研究. <i>2024 年海洋地球物理学术论坛</i>, 2024.04.</span></li>
+        <li class="en"><span>Mechanism of non-uniform lithospheric extension in the Qiongdongnan Basin driven by a dual thermal-dynamic system. <i>1st Youth Geophysics Conference</i>, 2024.03.</span></li>
+        <li class="zh"><span>双热动力系统驱动的琼东南盆地岩石圈非均一伸展机制研究. <i>首届青年地球物理大会</i>, 2024.03.</span></li>
+        <li class="en"><span>Thermo-rheological response to non-uniform lithospheric breakup in the Qiongdongnan Basin. <i>Annual Meeting of the Chinese Geoscience Union</i>, 2023.10.</span></li>
+        <li class="zh"><span>琼东南盆地岩石圈非均一伸展破裂过程的热-流变学响应. <i>中国地球科学联合学术年会</i>, 2023.10.</span></li>
+        <li class="en"><span>Thermo-rheological response to non-uniform lithospheric breakup in the Qiongdongnan Basin. <i>7th Earth System Science Conference</i>, 2023.07.</span></li>
+        <li class="zh"><span>琼东南盆地岩石圈非均一伸展破裂过程的热-流变学响应. <i>第七届地球系统科学大会</i>, 2023.07.</span></li>
+        <li class="en"><span>Non-uniform lithospheric breakup and ductile–brittle transition in the Qiongdongnan Basin. <i>2023 Marine Geophysics Forum</i>, 2023.05.</span></li>
+        <li class="zh"><span>琼东南盆地岩石圈非均一破裂过程和韧-脆转变特征. <i>2023 年海洋地球物理论坛</i>, 2023.05.</span></li>
+        <li class="en"><span>Thermo-rheological response to non-uniform lithospheric breakup in the Qiongdongnan Basin, northwestern South China Sea. <i>8th Youth Geoscience Forum</i>, 2023.05.</span></li>
+        <li class="zh"><span>南海西北部琼东南盆地岩石圈非均一破裂过程的热-流变学响应. <i>第八届青年地学论坛</i>, 2023.05.</span></li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2><span class="en">Projects</span><span class="zh">科研项目</span></h2>
+      <ol class="plist en">
+        <li><span>National Natural Science Foundation of China (Young Scientists Fund), Mechanism of non-uniform lithospheric extension in the Qiongdongnan Basin driven by a dual thermal-dynamic system, 2025.01–2027.12, <b>Principal Investigator</b></span></li>
+        <li><span>Natural Science Foundation of Shandong Province (Youth Project), Lithospheric thermo-rheological structure of the Qaidam Basin and its response to the growth of the northeastern Tibetan Plateau, 2023.01–2025.12, <b>Principal Investigator</b></span></li>
+        <li><span>National Natural Science Foundation of China (General Program), Conjugate structures and evolution of oceanic plateau breakup: A comparison of the Caroline and Greater Kerguelen plateaus, 2024.01–2027.12, <b>Participant</b></span></li>
+        <li><span>National Natural Science Foundation of China (General Program), Evolution of the source-to-sink system in the Yinggehai–Qiongdongnan basins and its implications for strike-slip inversion of the Ailao Shan–Red River Fault Zone, 2024.01–2027.12, <b>Participant</b></span></li>
+        <li><span>Open Fund of Key Laboratory, Numerical modeling of the influence of intracrustal ductile layers on the rifting style of the Qiongdongnan Basin, 2023.10–2025.09, <b>Principal Investigator</b></span></li>
+        <li><span>Open Fund of Key Laboratory, Ductile flow and cooling-induced embrittlement of the lower crust beneath the Xisha Trough, South China Sea, 2023.01–2024.12, <b>Principal Investigator</b></span></li>
+        <li><span>Open Fund of Key Laboratory, Lithospheric thermo-rheological structure of the Qiongdongnan Basin and its response to non-uniform continental margin breakup, 2022.01–2023.12, <b>Principal Investigator</b></span></li>
+        <li><span>Contract project, Hydrodynamic environment of pile-fixed offshore photovoltaic projects in the Dongying sea area, Shandong, 2023.10–2025.10, <b>Principal Investigator</b></span></li>
+        <li><span>Contract project, Route survey for the infrastructure project of the Changdao Marine Ecological Civilization Comprehensive Pilot Zone (water supply pipeline linking Miaodao, Xiaoheishan and Daheishan islands), 2025.07–2026.12, <b>Principal Investigator</b></span></li>
+        <li><span>Contract project under the National Science and Technology Major Project on New Oil and Gas Exploration and Development (Deep crust–mantle interactions and differential basin-controlling mechanisms in the South China Sea marginal sea), Multi-constraint, multi-layer coupled model testing and deep structure analysis of the northern South China Sea, 2026.09–2026.11, <b>Principal Investigator</b></span></li>
+        <li><span>International collaboration, GFZ Helmholtz Centre for Geosciences (Shandong Province–University Joint Visiting Scholar Program), Modelling of continental rifting in South China Sea (<a href="https://www.gfz.de/en/section/lithosphere-dynamics/projects/mcr-modelling-of-continental-rifting-in-south-china-sea" target="_blank" rel="noopener">MCR</a>), 2025.11–2026.11, <b>Visiting Scientist</b></span></li>
+      </ol>
+      <ol class="plist zh">
+        <li><span>国家自然科学基金青年项目，双热动力系统驱动的琼东南盆地岩石圈非均一伸展机制研究，2025.01–2027.12，<b>主持</b></span></li>
+        <li><span>山东省自然科学基金青年项目，柴达木盆地岩石圈热-流变结构与青藏高原东北缘生长过程的响应，2023.01–2025.12，<b>主持</b></span></li>
+        <li><span>国家自然科学基金面上项目，洋底高原裂解的共轭结构对比与演化机制研究——以卡罗琳和大凯尔盖朗高原为例，2024.01–2027.12，<b>参与</b></span></li>
+        <li><span>国家自然科学基金面上项目，莺歌海-琼东南盆地“源-汇”系统演替及对哀牢山-红河断裂带走滑反转的指示，2024.01–2027.12，<b>参与</b></span></li>
+        <li><span>重点实验室开放基金，壳内韧性层对琼东南盆地张裂形态影响的数值模拟研究，2023.10–2025.09，<b>主持</b></span></li>
+        <li><span>重点实验室开放基金，南海西沙海槽下地壳韧性流动和冷却脆化机制，2023.01–2024.12，<b>主持</b></span></li>
+        <li><span>重点实验室开放基金，琼东南盆地岩石圈热-流变结构与陆缘非均一破裂过程的响应，2022.01–2023.12，<b>主持</b></span></li>
+        <li><span>横向项目，山东东营海域桩基固定式海上光伏工程水动力环境特征研究，2023.10–2025.10，<b>主持</b></span></li>
+        <li><span>横向项目，长岛海洋生态文明综合试验区（省级园区）基础设施项目（庙岛-小黑山岛-大黑山岛供水管网连通工程）路由勘测，2025.07–2026.12，<b>主持</b></span></li>
+        <li><span>横向项目（来源于新型油气勘探开发国家科技重大专项“南海边缘海壳-幔深部作用及差异控盆机制”），南海北部多约束多圈层耦合模型测试与深部结构分析，2026.09–2026.11，<b>主持</b></span></li>
+        <li><span>国际合作，德国地学研究中心（GFZ）省校联合培养访学项目，Modelling of continental rifting in South China Sea（<a href="https://www.gfz.de/en/section/lithosphere-dynamics/projects/mcr-modelling-of-continental-rifting-in-south-china-sea" target="_blank" rel="noopener">MCR</a>），2025.11–2026.11，<b>访问学者</b></span></li>
+      </ol>
+    </section>
+
+    <footer><span class="en">Last updated October 2026</span><span class="zh">最后更新：2026 年 10 月</span></footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang button');
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+    try { localStorage.setItem('homepage-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+  var saved = null;
+  try { saved = localStorage.getItem('homepage-lang'); } catch (e) {}
+  setLang(saved === 'zh' ? 'zh' : 'en');
+})();
+</script>
+
+</body>
+</html>
