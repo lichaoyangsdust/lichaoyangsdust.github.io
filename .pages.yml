@@ -1,0 +1,125 @@
+# Pages CMS 配置：在 https://app.pagescms.org 用 GitHub 账号登录后编辑
+# 文字格式：**加粗**   *斜体*   [链接文字](https://网址)
+content:
+  - name: about
+    label: 个人简介 About
+    type: file
+    path: data/about.json
+    format: json
+    fields:
+      - name: en
+        label: 英文简介（段落之间空一行）
+        type: text
+      - name: zh
+        label: 中文简介（段落之间空一行）
+        type: text
+
+  - name: employment
+    label: 工作经历 Employment
+    type: file
+    path: data/employment.json
+    format: json
+    list: true
+    fields:
+      - name: period
+        label: 时间（如 2021.11–Present）
+        type: string
+      - name: en
+        label: 英文
+        type: text
+      - name: zh
+        label: 中文
+        type: text
+
+  - name: education
+    label: 教育经历 Education
+    type: file
+    path: data/education.json
+    format: json
+    list: true
+    fields:
+      - name: period
+        label: 时间（如 2013.09–2018.06）
+        type: string
+      - name: en
+        label: 英文
+        type: text
+      - name: zh
+        label: 中文
+        type: text
+
+  - name: publications_en
+    label: 英文论文 English Publications
+    type: file
+    path: data/publications_en.json
+    format: json
+    list: true
+    fields:
+      - name: citation
+        label: 引用（JGR 格式；本人用 **Li, C.** 加粗，期刊和卷号用 *斜体*）
+        type: text
+      - name: doi
+        label: DOI 链接（如 https://doi.org/10.xxxx/xxxx，没有可留空）
+        type: string
+
+  - name: publications_cn
+    label: 中文论文 Chinese Publications
+    type: file
+    path: data/publications_cn.json
+    format: json
+    list: true
+    fields:
+      - name: citation_zh
+        label: 中文引用（中文页面显示）
+        type: text
+      - name: citation_en
+        label: 英文引用（英文页面显示）
+        type: text
+      - name: doi
+        label: DOI 链接（没有可留空）
+        type: string
+
+  - name: datasets
+    label: 发表数据 Published Data
+    type: file
+    path: data/datasets.json
+    format: json
+    list: true
+    fields:
+      - name: citation
+        label: 数据引用
+        type: text
+      - name: doi
+        label: DOI 链接
+        type: string
+
+  - name: conferences
+    label: 学术会议 Conferences
+    type: file
+    path: data/conferences.json
+    format: json
+    list: true
+    fields:
+      - name: en
+        label: 英文
+        type: text
+      - name: zh
+        label: 中文（可与英文相同）
+        type: text
+      - name: doi
+        label: DOI 链接（没有可留空）
+        type: string
+
+  - name: projects
+    label: 科研项目 Projects
+    type: file
+    path: data/projects.json
+    format: json
+    list: true
+    fields:
+      - name: en
+        label: 英文
+        type: text
+      - name: zh
+        label: 中文
+        type: text
